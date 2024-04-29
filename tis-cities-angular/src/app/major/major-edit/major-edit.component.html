@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+<br />
+<form [formGroup]="majorForm" class="example-form" (ngSubmit)="saveChanges()">
+  <mat-form-field class="example-form-field">
+    <mat-label>Major name</mat-label>
+    <input
+      matInput
+      formControlName="name"
+      type="text"
+      [(ngModel)]="majorName"
+    />
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="majorName = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="example-form-field">
+    <mat-label>Major surname</mat-label>
+    <input
+      matInput
+      formControlName="surname"
+      type="text"
+      [(ngModel)]="majorSurname"
+    />
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="majorSurname = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <br />
+  <button mat-button color="primary" type="submit">Save Changes</button>
+  <button mat-button color="warn" [mat-dialog-close]="false">Cancel</button>
+</form>

@@ -1,0 +1,74 @@
+<h1 style="text-align: center">City List</h1>
+<div class="mat-row">
+  <button mat-stroked-button color="primary" (click)="openNewDialog()">
+    Add New City
+  </button>
+  <input
+    class="citySearchInput"
+    matInput
+    #searchTerm
+    type="text"
+    placeholder="Search cities by name"
+  />
+  <button mat-stroked-button color="primary" (click)="searchcitiesByNamePostCode(searchTerm.value)">
+    Search
+  </button>
+  <button mat-stroked-button color="accent" style="margin-left: 5px;" (click)="searchTerm.value = ''; cancelSearch()">
+    Cancel search
+  </button>
+</div>
+<table
+  mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8"
+  style="max-height: 500px; overflow-x: auto"
+>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.cityId }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="postCode">
+    <th mat-header-cell *matHeaderCellDef>Postcode</th>
+    <td mat-cell *matCellDef="let element">{{ element.postCode }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="major">
+    <th mat-header-cell *matHeaderCellDef>Major</th>
+    <td mat-cell *matCellDef="let element">{{ element.major.name }} {{ element.major.surname }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="noOfCitizens">
+    <th mat-header-cell *matHeaderCellDef>No. of citizens</th>
+    <td mat-cell *matCellDef="let element">{{ element.noOfCitizens }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="county">
+    <th mat-header-cell *matHeaderCellDef>County</th>
+    <td mat-cell *matCellDef="let element">{{ element.county.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <fa-icon
+        [icon]="faPencil"
+        (click)="openEditDialog(element.cityId)"
+        style="cursor: pointer"
+      ></fa-icon>
+      <fa-icon
+        (click)="deleteCity(element.cityId, element.name)"
+        [icon]="faTrashCan"
+        style="margin-left: 10px; cursor: pointer"
+      ></fa-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

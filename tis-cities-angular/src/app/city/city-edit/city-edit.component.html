@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+<br />
+<form [formGroup]="cityForm" class="example-form" (ngSubmit)="saveChanges()">
+  <mat-form-field class="example-form-field">
+    <mat-label>City name</mat-label>
+    <input
+      matInput
+      formControlName="name"
+      type="text"
+      [(ngModel)]="cityName"
+    />
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="cityName = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="example-form-field">
+    <mat-label>City postcode</mat-label>
+    <input
+      matInput
+      formControlName="postCode"
+      type="text"
+      [(ngModel)]="cityPostCode"
+    />
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="cityPostCode = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose major</mat-label>
+    <mat-select
+      [(value)]="cityMajor"
+      formControlName="major"
+      name="major"
+    >
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let major of majorDropdown" [value]="major">
+        {{ major.name }} {{ major.surname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-form-field">
+    <mat-label>No. of citizens</mat-label>
+    <input
+      matInput
+      formControlName="noOfCitizens"
+      type="text"
+      [(ngModel)]="cityNoOfCitizens"
+    />
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="cityNoOfCitizens = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose county</mat-label>
+    <mat-select
+      [(value)]="cityCounty"
+      formControlName="county"
+      name="county"
+    >
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let county of countyDropdown" [value]="county">
+        {{ county.name }} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+  <button mat-button color="primary" type="submit">Save Changes</button>
+  <button mat-button color="warn" [mat-dialog-close]="false">Cancel</button>
+</form>
